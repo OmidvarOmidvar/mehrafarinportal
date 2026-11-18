@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>پورتال کارکنان مهرآفرین</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+/* ===== توکن‌های طراحی ===== */
+:root{--navy:#1B508C;--navy-d:#063972;--teal:#01A0BE;--turq:#00B6CE;--gold:#B48B15;
+--navy-t:#E9EFF6;--teal-t:#E5F5F8;--gold-t:#F8F2DE;--bg:#F3FAFC;--g1:#F4F7FA;--g2:#DCE3EB;--g5:#566373;--tx:#1B2735;--r:16px;
+--sh:0 2px 10px rgba(6,57,114,.08);color-scheme:light}
+*{box-sizing:border-box;margin:0}
+body{font:400 15px/1.8 Vazirmatn,Tahoma,sans-serif;color:var(--tx);background:var(--bg);padding-top:env(safe-area-inset-top,0)}
+button,input,select,textarea{font:inherit;color:inherit}
+h1{font-size:22px;font-weight:800;color:var(--navy-d)}h2{font-size:17px;font-weight:700;color:var(--navy-d)}h3{font-size:15px;font-weight:600}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+aside{background:var(--navy);color:#fff;padding:16px 12px;position:sticky;top:0;height:100vh;overflow:auto;z-index:30}
+aside .brand{display:flex;align-items:center;gap:8px;padding:4px 8px 16px;font-weight:800;font-size:18px}
+aside a{display:flex;gap:10px;align-items:center;min-height:44px;padding:0 12px;border-radius:12px;color:#dbe7f5;text-decoration:none;margin-bottom:2px}
+aside a:hover{background:rgba(255,255,255,.1)}aside a.on{background:#fff;color:var(--navy-d);font-weight:600}
+.top{display:flex;align-items:center;gap:10px;padding:10px 20px;background:#fff;border-bottom:1px solid var(--g2);position:sticky;top:0;z-index:20}
+.top .sp{flex:1}.top select{min-height:40px;border:1px solid var(--g2);border-radius:10px;padding:0 8px;background:#fff}
+main{padding:20px;max-width:1100px;margin:auto;width:100%}
+.btn{min-height:44px;padding:0 18px;border-radius:12px;border:0;background:var(--navy);color:#fff;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;justify-content:center}
+.btn:hover{background:var(--navy-d)}.btn.ghost{background:var(--teal-t);color:var(--navy-d)}.btn.gold{background:var(--gold)}.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.sm{min-height:44px;padding:0 12px}.ib{width:44px;height:44px;border:0;background:none;border-radius:12px;cursor:pointer;display:inline-grid;place-items:center;color:var(--navy)}.ib:hover{background:var(--teal-t)}
+:focus-visible{outline:3px solid var(--turq);outline-offset:2px}
+.card{background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:16px;border:1px solid #e8eef4}
+.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.sp{flex:1}.mut{color:var(--g5);font-size:14px}
+.av{width:40px;height:40px;border-radius:50%;display:inline-grid;place-items:center;color:#fff;font-weight:700;flex:none}.av.lg{width:84px;height:84px;font-size:32px}
+.bdg{font-size:14px;padding:0 10px;border-radius:99px;background:var(--teal-t);color:var(--navy-d);display:inline-block}.bdg.g{background:var(--gold-t);color:#6d5200}.bdg.n{background:var(--navy-t)}.bdg.r{background:#fde8e8;color:#8a1f1f}
+.tabs{display:flex;gap:4px;border-bottom:2px solid var(--g2);margin-bottom:16px;overflow:auto}.tabs button{min-height:44px;padding:0 16px;background:none;border:0;border-bottom:3px solid transparent;margin-bottom:-2px;cursor:pointer;color:var(--g5);white-space:nowrap}.tabs .on{color:var(--teal);border-color:var(--teal);font-weight:700}
+input,select,textarea{border:1px solid var(--g2);border-radius:12px;padding:8px 12px;background:#fff;min-height:44px;width:100%}
+.srch{position:relative;flex:1;min-width:180px}.srch .ic{position:absolute;right:12px;top:12px;color:var(--g5)}.srch input{padding-right:40px}
+.hero{background:linear-gradient(135deg,var(--gold-t),#fff);border:1px solid #ecdca4;position:relative;overflow:hidden}
+.petal{position:absolute;pointer-events:none;opacity:.12}
+.empty{text-align:center;padding:32px 12px;color:var(--g5)}
+.sticky{padding:12px;border-radius:6px 6px 16px 6px;min-height:130px;box-shadow:var(--sh);display:flex;flex-direction:column;gap:6px}.sticky textarea{background:transparent;border:0;flex:1;resize:none;min-height:70px;padding:0}
+.ov{position:fixed;inset:0;background:rgba(6,57,114,.45);display:grid;place-items:center;z-index:60;padding:16px}.mod{background:#fff;border-radius:20px;padding:20px;width:min(520px,100%);max-height:88vh;overflow:auto}
+.chat{display:grid;grid-template-columns:280px 1fr;height:calc(100vh - 150px);min-height:420px;padding:0;overflow:hidden}
+.chat .list{border-left:1px solid var(--g2);overflow:auto;padding:8px}.chat .li{display:flex;gap:8px;align-items:center;width:100%;min-height:48px;padding:6px 8px;border:0;background:none;border-radius:12px;cursor:pointer;text-align:right}.chat .li.on{background:var(--teal-t)}
+.conv{display:flex;flex-direction:column;min-height:0}#msgs{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background:var(--g1)}
+.b{max-width:75%;padding:8px 14px;border-radius:16px 16px 16px 4px;background:#fff;box-shadow:var(--sh)}.b.me{align-self:flex-start;background:var(--navy);color:#fff;border-radius:16px 16px 4px 16px}.b small{display:block;opacity:.7;font-size:14px}
+.lk{border:0;background:none;cursor:pointer;color:inherit;display:inline-flex;align-items:center;gap:2px;opacity:.8;min-height:32px}.lk.on{color:#d6455d}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--turq);display:inline-block}
+table{width:100%;border-collapse:collapse}th,td{text-align:right;padding:10px;border-bottom:1px solid var(--g2)}th{color:var(--g5);font-weight:600;font-size:14px}
+.pb{height:10px;background:var(--navy-t);border-radius:9px;overflow:hidden}.pb i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--turq));transition:width .4s}
+.fab{position:fixed;left:20px;bottom:20px;z-index:40;width:56px;height:56px;border-radius:50%;border:0;background:var(--teal);color:#fff;box-shadow:0 6px 18px rgba(1,160,190,.5);cursor:pointer;display:grid;place-items:center}
+.bot{position:fixed;left:20px;bottom:88px;width:min(340px,calc(100vw - 32px));z-index:40;padding:0;overflow:hidden}.bot header{background:var(--navy);color:#fff;padding:12px 16px}.bot .bm{padding:12px;max-height:260px;overflow:auto;display:flex;flex-direction:column;gap:8px}
+.toast{position:fixed;bottom:84px;right:50%;transform:translateX(50%);background:var(--navy-d);color:#fff;padding:10px 20px;border-radius:99px;z-index:80}
+.bn{display:none}.menuBtn{display:none}
+.login{min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at 80% 10%,#d4f1f6,#fff 60%);position:relative;overflow:hidden;padding:16px}
+.login .card{width:min(400px,100%);position:relative;padding:28px}
+@media(max-width:1024px){.g3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){
+.app{display:block;padding-bottom:64px}aside{position:fixed;right:0;top:0;width:260px;transform:translateX(100%);transition:.25s;box-shadow:-8px 0 24px rgba(0,0,0,.2)}aside.open{transform:none}
+.g2,.g3{grid-template-columns:1fr}main{padding:14px}.menuBtn{display:inline-grid}.top{padding:8px 12px}
+.bn{display:flex;position:fixed;bottom:0;right:0;left:0;background:#fff;border-top:1px solid var(--g2);z-index:25;padding-bottom:env(safe-area-inset-bottom,0)}
+.bn a,.bn button{flex:1;min-height:56px;display:grid;place-items:center;font-size:14px;color:var(--g5);text-decoration:none;background:none;border:0;gap:0}.bn .on{color:var(--teal);font-weight:700}
+.chat{grid-template-columns:1fr}.chat .conv{display:none}.chat.open .list{display:none}.chat.open .conv{display:flex}.fab{bottom:76px}.bot{bottom:144px}.b{max-width:88%}.back{display:inline-grid!important}
+table{font-size:14px}}
+[hidden]{display:none!important}
+.back{display:none}
+.banner{background:linear-gradient(120deg,var(--navy-d),var(--navy) 55%,var(--teal));color:#fff;border-radius:20px;padding:24px;position:relative;overflow:hidden;display:flex}.banner .petal{opacity:.18;left:auto;right:auto;left:-20px;width:260px}
+.chip{background:rgba(255,255,255,.18);border-radius:99px;padding:0 12px;font-size:14px}
+.g4{grid-template-columns:repeat(4,1fr)}.qi{width:40px;height:40px;border-radius:12px;background:var(--teal-t);display:grid;place-items:center;color:var(--teal)}
+.dg{display:grid;grid-template-columns:2fr 1fr;gap:16px;align-items:start}.dg>.grid{align-content:start}
+@media(max-width:1024px){.g4{grid-template-columns:repeat(2,1fr)}.dg{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<noscript><p style="padding:24px;font:16px Tahoma,sans-serif" dir="rtl">برای نمایش پورتال، فایل را در مرورگر (کروم، سافاری یا اج) باز کنید و جاوااسکریپت را فعال بگذارید. پیش‌نمایش ایمیل یا پیام‌رسان کار نمی‌کند.</p></noscript>
+<div id="login" class="login" hidden></div>
+<div id="shell" class="app" hidden>
+ <aside id="side" aria-label="منوی اصلی"></aside>
+ <div>
+  <div class="top">
+   <button class="ib menuBtn" onclick="side.classList.toggle('open')" aria-label="باز کردن منو"><svg class="ic"><use/></svg></button>
+   <span class="mut">نقش نمایشی:</span><select id="roleSel" aria-label="سوییچ نقش (دمو)"></select><span class="sp"></span>
+   <button class="ib" aria-label="اعلان‌ها" onclick="toast('اعلان جدیدی ندارید')"></button>
+   <a href="#/profile" aria-label="پروفایل" id="meAv"></a>
+  </div>
+  <main id="main"></main>
+ </div>
+</div>
+<nav class="bn" id="bn" hidden aria-label="ناوبری پایین"></nav>
+<button class="fab" id="fab" onclick="toggleBot()" aria-label="دستیار آشنایی" hidden></button>
+<div id="bot" class="card bot" hidden></div>
+<div id="modal"></div>
+
+<script>
+/* ===== ابزارها ===== */
+const $=s=>document.querySelector(s),fa=n=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+const P={home:'<path d="M3 11l9-8 9 8v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/>',chat:'<path d="M21 12a8 8 0 01-11.5 7.2L4 20l1-4.5A8 8 0 1121 12z"/>',heart:'<path d="M12 20s-8-5-8-11a4.5 4.5 0 018-2.5A4.5 4.5 0 0120 9c0 6-8 11-8 11z"/>',doc:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>',news:'<path d="M4 5h13v14H6a2 2 0 01-2-2z"/><path d="M17 9h3v8a2 2 0 01-2 2M8 9h5M8 13h5"/>',note:'<path d="M5 4h14v10l-5 6H5z"/><path d="M14 20v-6h5"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/>',shield:'<path d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6z"/>',book:'<path d="M4 5c3-1 6-1 8 1 2-2 5-2 8-1v14c-3-1-6-1-8 1-2-2-5-2-8-1z"/><path d="M12 6v14"/>',send:'<path d="M3 11l18-8-8 18-2-8z"/>',clip:'<path d="M20 11l-8 8a5 5 0 01-7-7l8-8a3.5 3.5 0 015 5l-8 8a2 2 0 01-3-3l7-7"/>',menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',x:'<path d="M6 6l12 12M18 6L6 18"/>',plus:'<path d="M12 5v14M5 12h14"/>',back:'<path d="M9 5l7 7-7 7"/>',search:'<circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4"/>',bot:'<rect x="4" y="8" width="16" height="11" rx="4"/><path d="M12 8V4M9 13h.01M15 13h.01"/>',star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',trash:'<path d="M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13"/>',bell:'<path d="M6 16V11a6 6 0 0112 0v5l2 2H4zM10 21h4"/>'};
+const ic=n=>`<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${P[n]}</svg>`;
+/* لوگو: برای تعویض، آدرس فایل لوگو را در LOGO_SRC بگذارید */
+const LOGO_SRC='';
+const logo=(h=36)=>LOGO_SRC?`<img src="${LOGO_SRC}" alt="مهرآفرین" height="${h}">`:`<svg viewBox="0 0 48 42" height="${h}" role="img" aria-label="مهرآفرین"><path d="M24 36C12 32 8 20 12 8c8 4 12 14 12 28z" fill="#01A0BE"/><path d="M24 36c0-14 4-24 12-28 4 12 0 24-12 28z" fill="#1B508C"/><path d="M14 40a10 10 0 0120 0z" fill="#B48B15"/></svg>`;
+const petals=(c='#01A0BE')=>`<svg class="petal" style="left:-30px;bottom:-30px" width="220" viewBox="0 0 48 40"><path d="M24 36C12 32 8 20 12 8c8 4 12 14 12 28z" fill="${c}"/><path d="M24 36c0-14 4-24 12-28 4 12 0 24-12 28z" fill="${c}"/></svg>`;
+const COL=['#1B508C','#01A0BE','#6a5fb5','#c06a4a','#3f8f6b','#B48B15'];
+const av=(n,c='')=>`<span class="av ${c}" style="background:${COL[n.length%6]}" aria-hidden="true">${n[0]}</span>`;
+function toast(t){const e=document.createElement('div');e.className='toast';e.textContent=t;document.body.append(e);setTimeout(()=>e.remove(),2200)}
+function openM(h){$('#modal').innerHTML=`<div class="ov" onclick="if(event.target==this)closeM()"><div class="mod" role="dialog" aria-modal="true">${h}</div></div>`}
+function closeM(){$('#modal').innerHTML=''}
+
+/* ===== داده‌های نمونه (حافظه جاوااسکریپت) ===== */
+const ROLES={employee:'کارمند عادی',supervisor:'سرپرست واحد',dept:'مدیر دپارتمان',branch:'مدیر شعبه',hr:'منابع انسانی',admin:'ادمین مرکزی'};
+const ME={name:'سارا احمدی',title:'کارشناس مالی',unit:'واحد مالی',prov:'تبریز',boss:'رضا نوری',tel:'۰۹۱۴ ۱۲۳ ۴۵۶۷',mail:'s.ahmadi@mehrafarin.example',since:'۱۴۰۱/۰۶/۱۵'};
+const PEOPLE=[['علی رضایی','جذب مشارکت','اصفهان'],['مریم کریمی','پشتیبانی','رفسنجان'],['رضا نوری','مالی','شیراز'],['نگار صادقی','مددکاری','مشهد'],['حسین موسوی','دفتر مرکزی','تهران'],['زهرا قاسمی','آموزش','تبریز']];
+const S={role:'employee',ch:'g0',open:0,notes:[['برای جلسه سه‌شنبه گزارش مالی را آماده کنم','#FFF3B0'],['پیگیری بسته مشارکتی شرکت‌ها','#D7F3F8']],prog:new Set([0]),q:'',cat:'',acc:'',tab:'news',atab:'tree',lq:'',cq:'',
+ weekly:{n:'مریم کریمی',u:'پشتیبانی – رفسنجان',why:'برای همراهی صبورانه با خانواده‌های تحت حمایت و پیگیری شبانه‌روزی نیازهای خانه کودکان.'},
+ arch:[['نگار صادقی','مددکاری – مشهد','هفته دوم آبان'],['علی رضایی','جذب مشارکت – اصفهان','هفته اول آبان']],
+ kudos:[['علی رضایی','سارا احمدی','ممنون که گزارش مالی کمپین را با دقت و سریع آماده کردی.','۲ ساعت پیش'],['نگار صادقی','مریم کریمی','مهربانی و صبر شما به کودکان خانه رفسنجان انرژی می‌دهد.','دیروز'],['رضا نوری','زهرا قاسمی','کارگاه آموزشی دیروز عالی بود؛ دست شما درد نکند.','دو روز پیش']],
+ news:[['آغاز کمپین «گرمای زمستان» برای کودکان مناطق سردسیر','۲۴ آبان ۱۴۰۵','جذب مشارکت'],['افتتاح مرکز جدید مهرآفرین در رفسنجان','۲۰ آبان ۱۴۰۵','دفتر مرکزی'],['نتایج رضایت‌سنجی خانواده‌های تحت حمایت منتشر شد','۱۵ آبان ۱۴۰۵','مددکاری']],
+ events:[['کارگاه مهارت‌های ارتباطی با کودکان','۳ آذر – ساعت ۱۰','تبریز'],['جشن یلدای همکاران','۳۰ آذر – ساعت ۱۸','آنلاین'],['جلسه ماهانه هماهنگی استان‌ها','۱۰ آذر – ساعت ۹','آنلاین']],att:{},
+ docs:[['دستورالعمل پذیرش کودک در خانه‌ها','دستورالعمل','مددکاری','عمومی','۳.۲','۱۴۰۵/۰۸/۱۲','مرکز آموزش'],['آیین‌نامه مرخصی و ماموریت','آیین‌نامه','منابع انسانی','عمومی','۲.۰','۱۴۰۵/۰۶/۰۱','منابع انسانی'],['صورتجلسه شورای مدیران آبان','صورتجلسه','دفتر مرکزی','مدیران','۱.۰','۱۴۰۵/۰۸/۲۰','دبیرخانه'],['دستورالعمل هزینه‌کرد کمک‌های نقدی','دستورالعمل','مالی','واحد','۴.۱','۱۴۰۵/۰۷/۲۸','مدیر مالی'],['گزارش حسابرسی سالانه','صورتجلسه','مالی','محرمانه','۱.۱','۱۴۰۵/۰۵/۱۰','مدیر مالی']],
+ chs:[{id:'g0',n:'عمومی – همه کارکنان',g:'عمومی',m:[['علی رضایی','صبح بخیر! جلسه هماهنگی کمپین زمستان ساعت ۱۰ است.','۰۸:۴۵',2],['مریم کریمی','ممنون از یادآوری، من هستم.','۰۸:۵۲',0]]},{id:'g1',n:'استان آذربایجان شرقی',g:'استان',m:[['نگار صادقی','بازدید از خانه کودکان تبریز فردا انجام می‌شود.','۰۹:۱۰',1]]},{id:'g2',n:'واحد مالی',g:'واحد',m:[['رضا نوری','گزارش مصرف کالا آماده بررسی است.','۱۰:۲۰',0]]},{id:'d1',n:'علی رضایی',g:'پیام مستقیم',m:[['علی رضایی','سلام سارا، فایل بسته‌های مشارکتی را دیدی؟','۱۱:۰۵',0]]}],
+ users:[['سارا احمدی','کارمند عادی','واحد مالی',1],['رضا نوری','سرپرست واحد','واحد مالی',1],['علی رضایی','کارمند عادی','جذب مشارکت',1],['زهرا قاسمی','منابع انسانی','آموزش',0]],
+ mx:{},steps:[['آشنایی با مهرآفرین','مهرآفرین موسسه‌ای خیریه برای حمایت از کودکان و خانواده‌هاست؛ با خانه‌های کودکان، کمک‌های آموزشی و درمانی و برنامه‌های مشارکت مردمی.'],['قواعد رفتاری','احترام به کرامت کودکان و خانواده‌ها، رازداری اطلاعات پرونده‌ها و همکاری محترمانه، اصول ثابت رفتار ما هستند.'],['آیین‌نامه‌های کلیدی','مرخصی، ماموریت و هزینه‌کرد در مخزن اسناد قرار دارد. پیش از هر اقدام مالی، دستورالعمل هزینه‌کرد را بخوانید.'],['فرایندهای داخلی','درخواست کالا از انبار، گزارش‌دهی ماهانه و ثبت مشارکت‌های مردمی، همگی از مسیر سرپرست واحد انجام می‌شود.'],['ابزارهای پورتال','از کانال‌ها گفتگو کنید، با کودوس از همکاران قدردانی کنید و یادداشت‌های شخصی خود را بنویسید.']]};
+const SEC=['چت','اسناد','اخبار','کودوس','مدیریت'];
+Object.keys(ROLES).forEach((r,i)=>S.mx[r]=SEC.map((s,j)=>j<4?1:(r=='admin')));
+const can=k=>({pub:['supervisor','dept','branch','hr','admin'],hr:['hr'],admin:['admin'],up:['supervisor','dept','branch','admin']}[k]).includes(S.role);
+const H=(t,s='',a='')=>`<div class="row" style="margin-bottom:16px"><div class="sp"><h1>${t}</h1><div class="mut">${s}</div></div>${a}</div>`;
+const NAV=[['dash','داشبورد','home'],['chat','گفتگو','chat'],['kudos','قدردانی','heart'],['docs','مخزن اسناد','doc'],['news','اخبار و رویدادها','news'],['notes','یادداشت‌ها','note'],['learn','آشنایی با مهرآفرین','book'],['profile','پروفایل','user'],['admin','مدیریت دسترسی‌ها','shield']];
+
+/* ===== صفحات ===== */
+const R={};
+R.login=()=>`${petals()}<div class="card"><div style="text-align:center">${logo(64)}<h1 style="margin-top:8px">خوش آمدید</h1><p class="mut">اینجا خانه همکاران مهرآفرین است.</p></div>
+<form onsubmit="event.preventDefault();location.hash='#/dash'" style="display:grid;gap:12px;margin-top:16px"><label>نام کاربری<input required value="s.ahmadi" autocomplete="username"></label><label>رمز عبور<input type="password" required value="123456" autocomplete="current-password"></label><button class="btn">ورود به پورتال</button><a href="#/login" onclick="toast('لینک بازیابی به ایمیل شما ارسال شد');return false" class="mut" style="text-align:center">رمز عبور را فراموش کرده‌اید؟</a></form></div>`;
+
+R.dash=()=>{const w=S.weekly,k=S.kudos.slice(0,2);return `${H('سلام '+ME.name.split(' ')[0]+'، روزتان بخیر','امروز ۲۷ آبان ۱۴۰۵ · '+ME.unit)}
+<div class="grid g2"><div class="card hero">${petals('#B48B15')}<span class="bdg g">کارمند منتخب هفته</span><div class="row" style="margin-top:10px">${av(w.n,'lg')}<div class="sp"><h2>${w.n}</h2><div class="mut">${w.u}</div></div></div><p style="margin-top:8px">${w.why}</p></div>
+<div class="card"><div class="row"><h2 class="sp">آخرین کودوس‌ها</h2><a href="#/kudos">همه</a></div>${k.map(kd).join('')}</div>
+<div class="card"><div class="row"><h2 class="sp">اخبار و رویدادها</h2><a href="#/news">همه</a></div>${S.news.slice(0,2).map(n=>`<p style="margin-top:8px">${n[0]}<br><span class="mut">${n[1]} · ${n[2]}</span></p>`).join('')}<p style="margin-top:8px"><span class="bdg">رویداد</span> ${S.events[0][0]} – ${S.events[0][1]}</p></div>
+<div class="card"><div class="row"><h2 class="sp">اسناد تازه</h2><a href="#/docs">همه</a></div>${S.docs.slice(0,3).map(d=>`<p class="row" style="margin-top:6px">${ic('doc')}<span class="sp">${d[0]}</span><span class="mut">${d[5]}</span></p>`).join('')}</div>
+<div class="card"><h2>کانال‌های فعال</h2>${S.chs.slice(0,3).map(c=>`<a class="row" href="#/chat" onclick="S.ch='${c.id}'" style="margin-top:8px;text-decoration:none;color:inherit"><span class="dot"></span><span class="sp">${c.n}</span><span class="bdg">${fa(c.m.length)} پیام</span></a>`).join('')}</div>
+<div class="card"><h2>یادداشت‌های من</h2>${S.notes.slice(0,2).map(n=>`<p style="background:${n[1]};padding:6px 10px;border-radius:8px;margin-top:8px">${n[0]}</p>`).join('')||'<p class="mut">یادداشتی ندارید.</p>'}<a class="btn ghost" style="margin-top:10px;text-decoration:none" href="#/notes">رفتن به یادداشت‌ها</a><button class="btn gold" style="margin-top:10px;margin-right:8px" onclick="toggleBot()">${ic('bot')} دستیار آشنایی</button></div></div>`};
+/* داشبورد کامل (جایگزین نسخه قبلی) */
+R.dash=()=>{const w=S.weekly,pc=Math.round(S.prog.size/S.steps.length*100),un=S.chs.reduce((a,c)=>a+c.m.length,0);
+return `<div class="banner">${petals('#fff')}<div class="sp"><h1 style="color:#fff">سلام ${ME.name.split(' ')[0]}، روزتان بخیر</h1><p>امروز ۲۷ آبان ۱۴۰۵ · ${ME.unit} · ${ME.prov}</p><div class="row" style="margin-top:10px"><span class="chip">${fa(un)} پیام در کانال‌ها</span><span class="chip">${fa(S.docs.length)} سند در مخزن</span><span class="chip">${fa(S.events.length)} رویداد پیش‌رو</span></div></div></div>
+<div class="grid g4" style="margin:16px 0">${[['kudos','heart','ارسال کودوس'],['chat','chat','گفتگو با همکاران'],['notes','note','یادداشت جدید'],['docs','doc','جستجوی سند']].map(q=>`<a class="card row" href="#/${q[0]}" style="text-decoration:none;color:var(--navy-d);font-weight:600"><span class="qi">${ic(q[1])}</span>${q[2]}</a>`).join('')}</div>
+<div class="dg"><div class="grid">
+<div class="card hero">${petals('#B48B15')}<span class="bdg g">کارمند منتخب هفته</span><div class="row" style="margin-top:10px">${av(w.n,'lg')}<div class="sp"><h2>${w.n}</h2><div class="mut">${w.u}</div></div></div><p style="margin-top:8px">${w.why}</p><a href="#/kudos" class="btn ghost" style="margin-top:10px;text-decoration:none">آرشیو منتخب‌ها</a></div>
+<div class="card"><div class="row"><h2 class="sp">آخرین کودوس‌ها</h2><a href="#/kudos">همه</a></div>
+<form class="row" style="margin:10px 0;flex-wrap:nowrap" onsubmit="event.preventDefault();S.kudos.unshift([ME.name,dq.value,dx.value,'همین حالا']);toast('کودوس ارسال شد');go()"><select id="dq" required aria-label="همکار" style="width:36%"><option value="">همکار…</option>${PEOPLE.map(p=>`<option>${p[0]}</option>`).join('')}</select><input id="dx" maxlength="140" required placeholder="یک جمله قدردانی…" aria-label="متن کودوس"><button class="btn" aria-label="ارسال">${ic('heart')}</button></form>${S.kudos.slice(0,3).map(kd).join('')}</div>
+<div class="card"><div class="row"><h2 class="sp">اخبار داخلی</h2><a href="#/news">همه</a></div><div class="grid g3" style="margin-top:10px">${S.news.map((n,i)=>`<div style="border:1px solid var(--g2);border-radius:14px;overflow:hidden"><div style="height:70px;background:linear-gradient(${120+i*40}deg,var(--teal),var(--navy))"></div><div style="padding:10px"><h3>${n[0]}</h3><span class="mut">${n[1]}</span></div></div>`).join('')}</div></div></div>
+<div class="grid">
+<div class="card"><div class="row"><h2 class="sp">رویدادهای پیش‌رو</h2><a href="#/news" onclick="S.tab='ev'">همه</a></div>${S.events.map((e,i)=>`<div class="row" style="margin-top:10px;flex-wrap:nowrap"><span class="av" style="background:var(--navy);border-radius:12px">${fa(e[1].split(' ')[0])}</span><span class="sp"><b>${e[0]}</b><br><span class="mut">${e[1]}</span></span><button class="btn sm ${S.att[i]?'':'ghost'}" onclick="S.att[${i}]=!S.att[${i}];go()">${S.att[i]?'✓':'می‌آیم'}</button></div>`).join('')}</div>
+<div class="card"><div class="row"><h2 class="sp">مسیر آشنایی</h2><b>${fa(pc)}٪</b></div><div class="pb" style="margin:10px 0"><i style="width:${pc}%"></i></div><a class="btn ghost" href="#/learn" style="text-decoration:none">ادامه مسیر</a></div>
+<div class="card"><h2>کانال‌های فعال</h2>${S.chs.slice(0,3).map(c=>`<a class="row" href="#/chat" onclick="S.ch='${c.id}'" style="margin-top:8px;text-decoration:none;color:inherit"><span class="dot"></span><span class="sp">${c.n}</span><span class="bdg">${fa(c.m.length)}</span></a>`).join('')}</div>
+<div class="card"><div class="row"><h2 class="sp">اسناد تازه</h2><a href="#/docs">همه</a></div>${S.docs.slice(0,3).map(d=>`<p class="row" style="margin-top:6px;flex-wrap:nowrap">${ic('doc')}<span class="sp">${d[0]}</span></p>`).join('')}</div>
+<div class="card"><div class="row"><h2 class="sp">یادداشت‌های من</h2><a href="#/notes">همه</a></div>${S.notes.slice(0,2).map(n=>`<p style="background:${n[1]};padding:6px 10px;border-radius:8px;margin-top:8px">${n[0]||'یادداشت خالی'}</p>`).join('')||'<p class="mut">یادداشتی ندارید.</p>'}</div>
+<div class="card hero" style="text-align:center">${petals()}<h3>سؤالی دارید؟</h3><p class="mut">دستیار آشنایی آماده پاسخ است.</p><button class="btn" style="margin-top:8px" onclick="toggleBot()">${ic('bot')} گفتگو با دستیار</button></div>
+</div></div>`};
+const kd=k=>`<div class="row" style="margin-top:10px;align-items:flex-start">${av(k[0])}<div class="sp"><b>${k[0]}</b> <span class="mut">به</span> <b>${k[1]}</b><p>${k[2]}</p><span class="mut">${k[3]}</span></div>${ic('heart').replace('class="ic"','class="ic" style="color:var(--gold)"')}</div>`;
+
+R.chat=()=>{const c=S.chs.find(x=>x.id==S.ch);return `${H('گفتگو','کانال‌ها بر اساس واحد و استان شما نمایش داده می‌شوند.')}
+<div class="card chat ${S.open?'open':''}"><div class="list">${['عمومی','استان','واحد','پیام مستقیم'].map(g=>`<div class="mut" style="padding:8px">${g}</div>`+S.chs.filter(x=>x.g==g).map(x=>`<button class="li ${x.id==S.ch?'on':''}" onclick="S.ch='${x.id}';S.open=1;go()">${x.g=='پیام مستقیم'?av(x.n):ic('chat')}<span class="sp">${x.n}</span>${x.g=='پیام مستقیم'?'<span class="dot" title="آنلاین"></span>':''}</button>`).join('')).join('')}</div>
+<div class="conv"><div class="row" style="padding:8px 12px;border-bottom:1px solid var(--g2)"><button class="ib back" onclick="S.open=0;go()" aria-label="بازگشت">${ic('back')}</button><h3 class="sp">${c.n}</h3><div class="srch" style="max-width:200px"><span>${ic('search')}</span><input id="cs" placeholder="جستجو در گفتگو" oninput="S.cq=this.value;msgs()" value="${S.cq}"></div></div>
+<div id="msgs"></div>
+<form class="row" style="padding:10px;border-top:1px solid var(--g2);flex-wrap:nowrap" onsubmit="event.preventDefault();send()"><button type="button" class="ib" aria-label="ضمیمه فایل" onclick="send('📎 '+'فایل‌ضمیمه.pdf')">${ic('clip')}</button><input id="mi" placeholder="پیام یا @منشن بنویسید…" aria-label="پیام"><button class="btn" aria-label="ارسال">${ic('send')}</button></form>
+<div class="row" style="padding:0 10px 8px">${PEOPLE.slice(0,3).map(p=>`<button type="button" class="bdg n" style="border:0;cursor:pointer" onclick="mi.value+='@${p[0]} ';mi.focus()">@${p[0]}</button>`).join('')}</div></div></div>`};
+function msgs(){const c=S.chs.find(x=>x.id==S.ch),e=$('#msgs');if(!e)return;const l=c.m.map((m,i)=>[m,i]).filter(([m])=>m[1].includes(S.cq));
+ e.innerHTML=l.length?l.map(([m,i])=>`<div class="b ${m[0]==ME.name?'me':''}"><small>${m[0]} · ${m[2]}</small>${m[1].replace(/@(\S+ \S+)/g,'<b style="color:var(--turq)">@$1</b>')}<br><button class="lk" onclick="S.chs.find(x=>x.id==S.ch).m[${i}][3]++;msgs()" aria-label="قدردانی">${ic('heart')}${m[3]?fa(m[3]):''}</button></div>`).join(''):'<div class="empty">پیامی پیدا نشد.</div>';e.scrollTop=e.scrollHeight}
+function send(t){const v=t||$('#mi').value.trim();if(!v)return;S.chs.find(x=>x.id==S.ch).m.push([ME.name,v,fa(new Date().getHours())+':'+fa(String(new Date().getMinutes()).padStart(2,'0')),0]);if(!t)$('#mi').value='';msgs()}
+
+R.kudos=()=>`${H('کودوس و کارمند منتخب','یک جمله قدردانی، روز یک همکار را می‌سازد.',can('hr')?`<button class="btn gold" onclick="pickM()">${ic('star')} تعیین کارمند منتخب</button>`:'')}
+<div class="card hero" style="margin-bottom:16px">${petals('#B48B15')}<span class="bdg g">کارمند منتخب این هفته</span><div class="row" style="margin-top:8px">${av(S.weekly.n,'lg')}<div class="sp"><h2>${S.weekly.n}</h2><div class="mut">${S.weekly.u}</div><p>${S.weekly.why}</p></div></div></div>
+<div class="grid g2"><div class="card"><h2>ارسال کودوس</h2><form style="display:grid;gap:10px;margin-top:10px" onsubmit="event.preventDefault();addK()"><select id="kt" required aria-label="همکار"><option value="">انتخاب همکار…</option>${PEOPLE.map(p=>`<option>${p[0]}</option>`).join('')}</select><textarea id="kx" maxlength="140" rows="3" placeholder="یک جمله قدردانی (حداکثر ۱۴۰ کاراکتر)" oninput="kc.textContent=fa(140-this.value.length)" required></textarea><div class="row"><span class="mut">باقی‌مانده: <b id="kc">${fa(140)}</b></span><span class="sp"></span><button class="btn">${ic('heart')} ارسال</button></div></form>
+<h3 style="margin-top:16px">آرشیو منتخب‌ها</h3>${S.arch.map(a=>`<p class="row" style="margin-top:8px">${av(a[0])}<span class="sp"><b>${a[0]}</b><br><span class="mut">${a[1]} · ${a[2]}</span></span></p>`).join('')}</div>
+<div class="card"><h2>فید قدردانی</h2><div id="kf">${S.kudos.map(kd).join('')}</div></div></div>`;
+function addK(){S.kudos.unshift([ME.name,kt.value,kx.value,'همین حالا']);toast('کودوس شما ارسال شد');go()}
+function pickM(){openM(`<h2>تعیین کارمند منتخب هفته</h2><div style="display:grid;gap:10px;margin-top:12px"><select id="pm">${PEOPLE.map(p=>`<option value="${p[0]}|${p[1]} – ${p[2]}">${p[0]}</option>`).join('')}</select><textarea id="pr" rows="3" placeholder="دلیل انتخاب"></textarea><div class="card hero" id="pv">پیش‌نمایش: کارت ویژه با نام و دلیل انتخاب نمایش داده می‌شود.</div><div class="row"><button class="btn" onclick="const[a,b]=pm.value.split('|');S.arch.unshift([S.weekly.n,S.weekly.u,'هفته گذشته']);S.weekly={n:a,u:b,why:pr.value||'برای تلاش و مهربانی مثال‌زدنی.'};closeM();toast('کارمند منتخب ثبت شد');go()">ثبت</button><button class="btn ghost" onclick="closeM()">انصراف</button></div></div>`)}
+
+R.docs=()=>{const l=S.docs.filter(d=>(d[0]+d[2]).includes(S.q)&&(!S.cat||d[1]==S.cat)&&(!S.acc||d[3]==S.acc)),bc={'عمومی':'','واحد':'n','مدیران':'g','محرمانه':'r'};
+return `${H('مخزن اسناد','دستورالعمل‌ها، آیین‌نامه‌ها و صورتجلسات',can('up')?`<button class="btn" onclick="toast('بارگذاری سند جدید (نمونه)')">${ic('plus')} سند جدید</button>`:'')}
+<div class="row" style="margin-bottom:12px"><div class="srch"><span>${ic('search')}</span><input placeholder="جستجوی سند یا واحد" value="${S.q}" oninput="S.q=this.value;docList()" aria-label="جستجو"></div><select style="width:auto" onchange="S.cat=this.value;docList()" aria-label="دسته"><option value="">همه دسته‌ها</option><option>دستورالعمل</option><option>آیین‌نامه</option><option>صورتجلسه</option></select><select style="width:auto" onchange="S.acc=this.value;docList()" aria-label="سطح دسترسی"><option value="">همه سطوح</option><option>عمومی</option><option>واحد</option><option>مدیران</option><option>محرمانه</option></select></div><div id="dl" class="grid"></div>`};
+function docList(){const l=S.docs.map((d,i)=>[d,i]).filter(([d])=>(d[0]+d[2]).includes(S.q)&&(!S.cat||d[1]==S.cat)&&(!S.acc||d[3]==S.acc)),bc={'عمومی':'','واحد':'n','مدیران':'g','محرمانه':'r'};
+$('#dl').innerHTML=l.length?l.map(([d,i])=>`<button class="card row" style="text-align:right;cursor:pointer" onclick="docM(${i})">${ic('doc')}<span class="sp"><b>${d[0]}</b><br><span class="mut">${d[1]} · نسخه ${d[4]} · ${d[5]} · ${d[6]}</span></span><span class="bdg ${bc[d[3]]}">${d[3]}</span></button>`).join(''):`<div class="card empty">${ic('search')}<p>سندی با این فیلتر پیدا نشد.</p></div>`}
+function docM(i){const d=S.docs[i];openM(`<div class="row"><h2 class="sp">${d[0]}</h2><button class="ib" onclick="closeM()" aria-label="بستن">${ic('x')}</button></div><p class="mut">${d[1]} · ${d[2]} · سطح: ${d[3]}</p><div class="card" style="background:var(--g1);margin:12px 0;min-height:110px">پیش‌نمایش سند: این بخش متن سند را نمایش می‌دهد…</div><h3>تاریخچه نسخه‌ها</h3><p class="mut">نسخه ${d[4]} – ${d[5]} (فعلی)<br>نسخه ۱.۰ – ۱۴۰۴/۰۲/۱۰</p><div class="row" style="margin-top:12px"><button class="btn" onclick="toast('دانلود شروع شد')">دانلود</button>${can('up')?`<button class="btn ghost" onclick="toast('نسخه جدید بارگذاری شد')">بارگذاری نسخه جدید</button><button class="btn ghost" onclick="toast('تنظیمات دسترسی باز شد')">تنظیم دسترسی</button>`:''}</div>`)}
+
+R.news=()=>`${H('اخبار و رویدادها','',can('pub')?`<button class="btn" onclick="pubM()">${ic('plus')} انتشار</button>`:'')}<div class="tabs"><button class="${S.tab=='news'?'on':''}" onclick="S.tab='news';go()">اخبار داخلی</button><button class="${S.tab=='ev'?'on':''}" onclick="S.tab='ev';go()">رویدادها</button></div>
+${S.tab=='news'?`<div class="grid g3">${S.news.map((n,i)=>`<div class="card" style="padding:0;overflow:hidden"><div style="height:110px;background:linear-gradient(${120+i*40}deg,var(--teal),var(--navy));position:relative">${petals('#fff')}</div><div style="padding:14px"><h3>${n[0]}</h3><p class="mut">${n[1]} · ${n[2]}</p></div></div>`).join('')}</div>`:`<div class="grid">${S.events.map((e,i)=>`<div class="card row"><span class="av" style="background:var(--navy);border-radius:12px">${fa(e[1].split(' ')[0])}</span><div class="sp"><h3>${e[0]}</h3><span class="mut">${e[1]} · ${e[2]}</span></div><button class="btn ${S.att[i]?'':'ghost'}" onclick="S.att[${i}]=!S.att[${i}];go()">${S.att[i]?'ثبت‌نام شد ✓':'شرکت می‌کنم'}</button></div>`).join('')}</div>`}`;
+function pubM(){openM(`<h2>انتشار ${S.tab=='news'?'خبر':'رویداد'}</h2><div style="display:grid;gap:10px;margin-top:12px"><input id="pt" placeholder="عنوان"><button class="btn" onclick="if(pt.value){(S.tab=='news'?S.news:S.events).unshift(S.tab=='news'?[pt.value,'۲۷ آبان ۱۴۰۵',ME.unit]:[pt.value,'به‌زودی','آنلاین']);closeM();go()}">انتشار</button></div>`)}
+
+R.notes=()=>`${H('یادداشت‌های من','خصوصی و فقط برای شما',`<button class="btn" onclick="S.notes.unshift(['','#FFF3B0']);go()">${ic('plus')} یادداشت جدید</button>`)}
+${S.notes.length?`<div class="grid g3">${S.notes.map((n,i)=>`<div class="sticky" style="background:${n[1]}"><textarea aria-label="متن یادداشت" placeholder="بنویسید…" oninput="S.notes[${i}][0]=this.value">${n[0]}</textarea><div class="row">${['#FFF3B0','#D7F3F8','#FBD9E2','#DDF2D3'].map(c=>`<button aria-label="رنگ" onclick="S.notes[${i}][1]='${c}';go()" style="width:24px;height:24px;border-radius:50%;border:2px solid #fff;background:${c};cursor:pointer"></button>`).join('')}<span class="sp"></span><button class="ib" aria-label="حذف" onclick="S.notes.splice(${i},1);go()">${ic('trash')}</button></div></div>`).join('')}</div>`:`<div class="card empty">${petals()}<p>هنوز یادداشتی ندارید. با دکمه «یادداشت جدید» شروع کنید.</p></div>`}`;
+
+R.profile=()=>`${H('پروفایل من')}<div class="grid g2"><div class="card"><div class="row">${av(ME.name,'lg')}<div><h2>${ME.name}</h2><span class="bdg">${ROLES[S.role]}</span></div></div>
+<div style="display:grid;gap:8px;margin-top:14px"><label>سمت<input value="${ME.title}" disabled></label><label>واحد / استان<input value="${ME.unit} · ${ME.prov}" disabled></label><label>مدیر مستقیم<input value="${ME.boss}" disabled></label><label>تلفن<input id="pt1" value="${ME.tel}"></label><label>ایمیل<input id="pt2" value="${ME.mail}"></label><label>شروع همکاری<input value="${ME.since}" disabled></label>
+<div class="row"><button class="btn" onclick="ME.tel=pt1.value;ME.mail=pt2.value;toast('اطلاعات ذخیره شد')">ذخیره</button><button class="btn ghost" onclick="pwM()">تغییر رمز عبور</button></div></div></div>
+<div class="card"><h2>کودوس‌های دریافتی</h2>${S.kudos.filter(k=>k[1]==ME.name).map(kd).join('')||'<div class="empty">هنوز کودوسی دریافت نکرده‌اید.</div>'}</div></div>`;
+function pwM(){openM(`<h2>تغییر رمز عبور</h2><div style="display:grid;gap:10px;margin-top:12px"><input type="password" placeholder="رمز فعلی"><input type="password" placeholder="رمز جدید"><button class="btn" onclick="closeM();toast('رمز عبور تغییر کرد')">ثبت</button></div>`)}
+
+R.admin=()=>{if(!can('admin'))return `${H('مدیریت دسترسی‌ها')}<div class="card empty">${ic('shield')}<p>این بخش فقط برای ادمین مرکزی در دسترس است. از سوییچ نقش بالای صفحه استفاده کنید.</p></div>`;
+const T=[['tree','ساختار سازمانی'],['users','کاربران'],['mx','ماتریس دسترسی'],['ch','کانال‌ها و اسناد']];
+const body={tree:`<div class="card"><b>دفتر مرکزی (تهران)</b><ul style="margin:6px 24px;line-height:2.2"><li>آذربایجان شرقی<ul style="margin-right:20px"><li>شعبه تبریز</li><li>مرکز کودکان تبریز</li></ul></li><li>اصفهان<ul style="margin-right:20px"><li>شعبه اصفهان</li></ul></li><li>کرمان<ul style="margin-right:20px"><li>مرکز رفسنجان</li></ul></li></ul><b>دپارتمان‌ها:</b> <span class="bdg">مالی</span> <span class="bdg">جذب مشارکت</span> <span class="bdg">پشتیبانی</span> <span class="bdg">مددکاری</span></div>`,
+users:`<div class="card"><div class="row" style="margin-bottom:8px"><h2 class="sp">کاربران</h2><button class="btn sm" onclick="S.users.push(['کاربر جدید','کارمند عادی','واحد مالی',1]);go()">${ic('plus')} افزودن</button></div><table><tr><th>نام</th><th>نقش</th><th>واحد</th><th>وضعیت</th></tr>${S.users.map((u,i)=>`<tr><td>${u[0]}</td><td><select aria-label="نقش" onchange="S.users[${i}][1]=this.value">${Object.values(ROLES).map(r=>`<option ${r==u[1]?'selected':''}>${r}</option>`).join('')}</select></td><td>${u[2]}</td><td><button class="btn sm ${u[3]?'':'ghost'}" onclick="S.users[${i}][3]=!S.users[${i}][3];go()">${u[3]?'فعال':'غیرفعال'}</button></td></tr>`).join('')}</table></div>`,
+mx:`<div class="card" style="overflow:auto"><table><tr><th>نقش</th>${SEC.map(s=>`<th>${s}</th>`).join('')}</tr>${Object.keys(ROLES).map(r=>`<tr><td>${ROLES[r]}</td>${SEC.map((s,j)=>`<td><input type="checkbox" style="width:24px;min-height:24px" aria-label="${ROLES[r]} ${s}" ${S.mx[r][j]?'checked':''} onchange="S.mx['${r}'][${j}]=this.checked"></td>`).join('')}</tr>`).join('')}</table></div>`,
+ch:`<div class="grid g2"><div class="card"><h2>کانال‌های چت</h2>${S.chs.map(c=>`<p class="row" style="margin-top:8px"><span class="sp">${c.n}</span><span class="bdg">${c.g}</span></p>`).join('')}</div><div class="card"><h2>سطح دسترسی اسناد</h2>${S.docs.map(d=>`<p class="row" style="margin-top:8px"><span class="sp">${d[0]}</span><span class="bdg">${d[3]}</span></p>`).join('')}</div></div>`};
+return `${H('مدیریت واحدها و دسترسی‌ها')}<div class="tabs">${T.map(t=>`<button class="${S.atab==t[0]?'on':''}" onclick="S.atab='${t[0]}';go()">${t[1]}</button>`).join('')}</div>${body[S.atab]}`};
+
+R.learn=()=>{const st=S.steps,pc=Math.round(S.prog.size/st.length*100),l=st.map((s,i)=>[s,i]).filter(([s])=>(s[0]+s[1]).includes(S.lq));
+return `${H('آشنایی با مهرآفرین','مسیر گام‌به‌گام برای همکاران جدید')}<div class="card" style="margin-bottom:16px"><div class="row"><b class="sp">پیشرفت شما</b><b>${fa(pc)}٪</b></div><div class="pb" role="progressbar" aria-valuenow="${pc}"><i style="width:${pc}%"></i></div></div>
+<div class="srch" style="margin-bottom:12px"><span>${ic('search')}</span><input placeholder="جستجو در محتوا" value="${S.lq}" oninput="S.lq=this.value;go(1)" aria-label="جستجو"></div>
+<div class="grid">${l.length?l.map(([s,i])=>`<div class="card row" style="align-items:flex-start"><span class="av" style="background:${S.prog.has(i)?'var(--teal)':'var(--g5)'}">${fa(i+1)}</span><div class="sp"><h3>${s[0]}</h3><p>${s[1]}</p></div><button class="btn sm ${S.prog.has(i)?'':'ghost'}" onclick="S.prog.has(${i})?S.prog.delete(${i}):S.prog.add(${i});go(1)">${S.prog.has(i)?'خوانده شد ✓':'مطالعه شد'}</button></div>`).join(''):`<div class="card empty">نتیجه‌ای پیدا نشد.</div>`}</div>`};
+
+/* ===== چت‌بات (آماده اتصال به سرویس واقعی) ===== */
+const BOT_Q={'مرخصی را چطور ثبت کنم؟':'فرم مرخصی را از مخزن اسناد دریافت و به سرپرست واحد ارسال کنید.','کودوس چیست؟':'کودوس یک جمله قدردانی عمومی برای همکاران است؛ بدون امتیاز و رتبه‌بندی.','آیین‌نامه‌ها کجاست؟':'در بخش «مخزن اسناد»، دسته آیین‌نامه‌ها.'};
+/* برای اتصال به چت‌بات واقعی، این تابع را با fetch به سرور جایگزین کنید */
+async function askBot(q){return BOT_Q[q]||'سؤال شما ثبت شد؛ به‌زودی دستیار هوشمند پاسخ می‌دهد.'}
+function toggleBot(){const b=$('#bot');b.hidden=!b.hidden;if(!b.hidden)b.innerHTML=`<header class="row"><b class="sp">دستیار آشنایی</b><button class="ib" style="color:#fff" onclick="toggleBot()" aria-label="بستن">${ic('x')}</button></header><div class="bm" id="bm"><div class="b">سلام! من دستیار مهرآفرین هستم. چطور کمکتان کنم؟</div>${Object.keys(BOT_Q).map(q=>`<button class="btn ghost sm" onclick="ask(this.textContent)">${q}</button>`).join('')}</div><form class="row" style="padding:8px;flex-wrap:nowrap" onsubmit="event.preventDefault();ask(bi.value);bi.value=''"><input id="bi" placeholder="سؤال بپرسید…" aria-label="سؤال"><button class="btn" aria-label="ارسال">${ic('send')}</button></form>`}
+async function ask(q){if(!q)return;const m=$('#bm');m.insertAdjacentHTML('beforeend',`<div class="b me">${q}</div>`);const a=await askBot(q);m.insertAdjacentHTML('beforeend',`<div class="b">${a}</div>`);m.scrollTop=m.scrollHeight}
+
+/* ===== مسیریابی و قاب اصلی ===== */
+function go(keep){const p=(location.hash.slice(2)||'dash').split('/')[0],pg=R[p]&&p!='login'?p:'dash',lg=false;
+ $('#login').hidden=!lg;$('#shell').hidden=lg;$('#bn').hidden=lg;$('#fab').hidden=lg;if(lg){$('#bot').hidden=true;$('#login').innerHTML=R.login();return}
+ const f=keep&&document.activeElement.tagName=='INPUT'?document.activeElement.selectionStart:null;
+ $('#main').innerHTML=R[pg]();if(pg=='chat')msgs();if(pg=='docs')docList();
+ if(f!==null){const i=$('#main input');if(i){i.focus();i.setSelectionRange(f,f)}}
+ $('#side').innerHTML=`<div class="brand">${logo(34)} مهرآفرین</div>`+NAV.map(n=>`<a href="#/${n[0]}" class="${n[0]==pg?'on':''}" onclick="side.classList.remove('open')">${ic(n[2])}${n[1]}</a>`).join('');
+ $('#bn').innerHTML=NAV.slice(0,4).map(n=>`<a href="#/${n[0]}" class="${n[0]==pg?'on':''}">${ic(n[2])}${n[1].split(' ')[0]}</a>`).join('')+`<button onclick="side.classList.toggle('open')">${ic('menu')}منو</button>`;
+ $('#fab').innerHTML=ic('bot');$('.menuBtn').innerHTML=ic('menu');$('.top .ib[aria-label=اعلان‌ها]').innerHTML=ic('bell');$('#meAv').innerHTML=av(ME.name);
+ window.scrollTo(0,0)}
+$('#roleSel').innerHTML=Object.entries(ROLES).map(([k,v])=>`<option value="${k}">${v}</option>`).join('');
+$('#roleSel').onchange=e=>{S.role=e.target.value;go()};
+addEventListener('hashchange',()=>{S.open=0;go()});go();
+</script>
+</body>
+</html>
